@@ -1,0 +1,48 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #1b1b1b, #2e2e2e);
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 20px;
+  background-color: #222;
+  border-bottom: 2px solid #444;
+}
+
+.slot-machine {
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.reels {
+  display: flex;
+  justify-content: space-around;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: gold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: orange;
+}
+
+footer {
+  margin-top: 50px;
+  font-size: 14px;
+}
