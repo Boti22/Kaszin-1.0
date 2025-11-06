@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Roulette - Fun Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="shared.js" defer></script>
+  <script src="roulette.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>🎡 Kaszi - Roulette</h1>
+  </header>
+
+  <main class="game-wrapper container">
+    <div class="top-bar">
+      <button class="home-btn" onclick="location.href='index.html'">🏠 Főmenü</button>
+      <div class="chips">Chipek: <span id="chipDisplayRoulette">100</span></div>
+    </div>
+
+    <div class="card" style="display:flex;gap:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:300px">
+        <div class="wheel-wrap">
+          <div>
+            <div class="pointer" aria-hidden="true"></div>
+            <div class="wheel" id="wheel">
+              <img src="roulette.png" alt="roulette wheel" />
+            </div>
+          </div>
+        </div>
+        <p id="rouletteResult" class="result"></p>
+      </div>
+
+      <div style="flex:1;min-width:300px">
+        <h3>Fogadás</h3>
+        <div class="bet-panel">
+          <label>Tét (chip): <input id="betAmount" type="number" value="10" min="1" style="width:100px;padding:6px;border-radius:6px"/></label>
+          <button id="clearBets">Törlés</button>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4>Gyorsfogadások</h4>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+            <button class="quick-bet" data-type="color" data-value="red">Piros</button>
+            <button class="quick-bet" data-type="color" data-value="black">Fekete</button>
+            <button class="quick-bet" data-type="parity" data-value="even">Páros</button>
+            <button class="quick-bet" data-type="parity" data-value="odd">Páratlan</button>
+            <button class="quick-bet" data-type="range" data-value="1-18">1–18</button>
+            <button class="quick-bet" data-type="range" data-value="19-36">19–36</button>
+            <button class="quick-bet" data-type="dozen" data-value="1">1–12</button>
+            <button class="quick-bet" data-type="dozen" data-value="2">13–24</button>
+            <button class="quick-bet" data-type="dozen" data-value="3">25–36</button>
+            <button class="quick-bet" data-type="column" data-value="1">Col 1</button>
+            <button class="quick-bet" data-type="column" data-value="2">Col 2</button>
+            <button class="quick-bet" data-type="column" data-value="3">Col 3</button>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4>Válassz számot (katt):</h4>
+          <div class="roulette-grid" id="rouletteGrid"></div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="bet-summary" id="betSummary">Aktuális fogadások: nincs</div>
+          <div style="margin-top:10px">
+            <button id="spinBtnR">Pörgetés</button>
+          </div>
+        </div>
+
+        <div class="bets-list" id="betsList"></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blackjack - Fun Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="shared.js" defer></script>
+  <script src="blackjack.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>♠️ Kaszi - Blackjack</h1>
+  </header>
+
+  <main class="game-wrapper container">
+    <div class="top-bar">
+      <button class="home-btn" onclick="location.href='index.html'">🏠 Főmenü</button>
+      <div class="chips">Chipek: <span id="chipDisplayBJ">100</span></div>
+    </div>
+
+    <div class="card">
+      <div>
+        <label>Tét (chip): <input id="bjBet" type="number" value="20" min="1" style="width:80px;padding:6px;border-radius:6px"/></label>
+        <button id="dealBtn">Deal</button>
+      </div>
+
+      <div style="margin-top:12px;">
+        <h3>Dealer (<span id="dealerValue">0</span>)</h3>
+        <div id="dealerHand" class="hand"></div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <h3>Player (<span id="playerValue">0</span>)</h3>
+        <div id="playerHand" class="hand"></div>
+      </div>
+
+      <div style="margin-top:12px;" class="controls">
+        <button id="hitBtn" disabled>Hit</button>
+        <button id="standBtn" disabled>Stand</button>
+        <button id="surrenderBtn" disabled>Surrender</button>
+        <button id="restartBtn">Restart</button>
+        <p id="bjResult" class="result"></p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

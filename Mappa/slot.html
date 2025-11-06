@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Slot - Fun Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="shared.js" defer></script>
+  <script src="slot.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>🎰 Kaszi - Slot</h1>
+  </header>
+
+  <main class="game-wrapper container">
+    <div class="top-bar">
+      <button class="home-btn" onclick="location.href='index.html'">🏠 Főmenü</button>
+      <div class="chips">Chipek: <span id="chipDisplaySlot">100</span></div>
+    </div>
+
+    <div class="card slot-machine">
+      <div class="reels">
+        <div class="reel" id="reel1">🍒</div>
+        <div class="reel" id="reel2">🍋</div>
+        <div class="reel" id="reel3">🍊</div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
+        <button id="spinBtn">Pörgetés (-10 chip)</button>
+        <button id="resetBtn">Nullázás (100)</button>
+      </div>
+      <p id="result" class="result"></p>
+    </div>
+  </main>
+</body>
+</html>
