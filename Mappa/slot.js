@@ -7,12 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
   resetBtn = document.getElementById('resetBtn');
   resultEl = document.getElementById('result');
   spinBtn.addEventListener('click', spinReels);
-  resetBtn.addEventListener('click', ()=>{ setChips(100); resultEl.textContent='🔄 Chipek visszaállítva 100-ra.'; });
+  resetBtn.addEventListener('click', ()=>{ 
+    setChips(100); 
+    resultEl.textContent = '🔄 Chips reset to 100.'; 
+  });
   window.addEventListener('storage', ()=>{ /* UI updated by shared.js */ });
 });
 
 function spinReels(){
-  if(getChips() < 10){ resultEl.textContent = '❌ Nincs elég chip a pörgetéshez!'; return; }
+  if(getChips() < 10){ 
+    resultEl.textContent = '❌ Not enough chips to spin!'; 
+    return; 
+  }
   changeChips(-10);
 
   const r1 = document.getElementById('reel1');
@@ -25,7 +31,7 @@ function spinReels(){
     r2.textContent = symbols[Math.floor(Math.random()*symbols.length)];
     r3.textContent = symbols[Math.floor(Math.random()*symbols.length)];
     cycles--;
-    if(cycles<=0){
+    if(cycles <= 0){
       clearInterval(iv);
       evaluateSlot(r1.textContent, r2.textContent, r3.textContent);
     }
@@ -35,11 +41,11 @@ function spinReels(){
 function evaluateSlot(s1,s2,s3){
   if(s1===s2 && s2===s3){
     changeChips(500);
-    resultEl.textContent = '🎉 Jackpot! +500 chip!';
+    resultEl.textContent = '🎉 Jackpot! +500 chips!';
   } else if (s1===s2 || s2===s3 || s1===s3){
     changeChips(100);
-    resultEl.textContent = '👍 Szép! +100 chip!';
+    resultEl.textContent = '👍 Nice! +100 chips!';
   } else {
-    resultEl.textContent = '😢 Próbáld újra!';
+    resultEl.textContent = '😢 Try again!';
   }
 }

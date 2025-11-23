@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -10,13 +10,13 @@
 </head>
 <body>
   <header>
-    <h1>🎡 Kaszi - Roulette</h1>
+    <h1>🎡 Casino - Roulette</h1>
   </header>
 
   <main class="game-wrapper container">
     <div class="top-bar">
-      <button class="home-btn" onclick="location.href='index.html'">🏠 Főmenü</button>
-      <div class="chips">Chipek: <span id="chipDisplayRoulette">100</span></div>
+      <button class="home-btn" onclick="location.href='index.html'">🏠 Main Menu</button>
+      <div class="chips">Chips: <span id="chipDisplayRoulette">100</span></div>
     </div>
 
     <div class="card" style="display:flex;gap:16px;flex-wrap:wrap">
@@ -33,19 +33,19 @@
       </div>
 
       <div style="flex:1;min-width:300px">
-        <h3>Fogadás</h3>
+        <h3>Betting</h3>
         <div class="bet-panel">
-          <label>Tét (chip): <input id="betAmount" type="number" value="10" min="1" style="width:100px;padding:6px;border-radius:6px"/></label>
-          <button id="clearBets">Törlés</button>
+          <label>Bet (chips): <input id="betAmount" type="number" value="10" min="1" style="width:100px;padding:6px;border-radius:6px"/></label>
+          <button id="clearBets">Clear</button>
         </div>
 
         <div style="margin-top:12px">
-          <h4>Gyorsfogadások</h4>
+          <h4>Quick Bets</h4>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-            <button class="quick-bet" data-type="color" data-value="red">Piros</button>
-            <button class="quick-bet" data-type="color" data-value="black">Fekete</button>
-            <button class="quick-bet" data-type="parity" data-value="even">Páros</button>
-            <button class="quick-bet" data-type="parity" data-value="odd">Páratlan</button>
+            <button class="quick-bet" data-type="color" data-value="red">Red</button>
+            <button class="quick-bet" data-type="color" data-value="black">Black</button>
+            <button class="quick-bet" data-type="parity" data-value="even">Even</button>
+            <button class="quick-bet" data-type="parity" data-value="odd">Odd</button>
             <button class="quick-bet" data-type="range" data-value="1-18">1–18</button>
             <button class="quick-bet" data-type="range" data-value="19-36">19–36</button>
             <button class="quick-bet" data-type="dozen" data-value="1">1–12</button>
@@ -58,14 +58,14 @@
         </div>
 
         <div style="margin-top:12px">
-          <h4>Válassz számot (katt):</h4>
+          <h4>Select a number (click):</h4>
           <div class="roulette-grid" id="rouletteGrid"></div>
         </div>
 
         <div style="margin-top:12px">
-          <div class="bet-summary" id="betSummary">Aktuális fogadások: nincs</div>
+          <div class="bet-summary" id="betSummary">Current bets: none</div>
           <div style="margin-top:10px">
-            <button id="spinBtnR">Pörgetés</button>
+            <button id="spinBtnR">Spin</button>
           </div>
         </div>
 

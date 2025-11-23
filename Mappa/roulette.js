@@ -43,11 +43,11 @@ function buildGrid(){
 
 function onNumberClicked(n, cell){
   const stake = Math.max(1, Math.floor(Number(betAmountEl.value) || 0));
-  if(getChips() < stake){ resultEl.textContent = '❌ Nincs elég chip a téthez!'; return; }
+  if(getChips() < stake){ resultEl.textContent = '❌ Not enough chips for the bet!'; return; }
   currentBets.push({type:'number', value:n, stake});
   changeChips(-stake);
   renderBetsUI();
-  resultEl.textContent = `Tét rögzítve: ${n} - ${stake} chip.`;
+  resultEl.textContent = `Bet placed: ${n} - ${stake} chips.`;
 }
 
 function addQuickBetListeners(){
@@ -63,31 +63,30 @@ function addQuickBetListeners(){
 
 function placeQuickBet(type, value){
   const stake = Math.max(1, Math.floor(Number(betAmountEl.value) || 0));
-  if(getChips() < stake){ resultEl.textContent = '❌ Nincs elég chip a téthez!'; return; }
-  // For clarity, store value as string for parity/color/range/dozen/column
+  if(getChips() < stake){ resultEl.textContent = '❌ Not enough chips for the bet!'; return; }
   currentBets.push({type, value, stake});
   changeChips(-stake);
   renderBetsUI();
-  resultEl.textContent = `Tét: ${type} ${value} - ${stake} chip.`;
+  resultEl.textContent = `Bet: ${type} ${value} - ${stake} chips.`;
 }
 
 function renderBetsUI(){
-  // highlight number cells with bets
   const cells = gridEl.querySelectorAll('.number-cell');
   cells.forEach(c => c.style.outline = '');
-  // Build bet summary
+
   if(currentBets.length===0){
-    betSummaryEl.textContent = 'Aktuális fogadások: nincs';
+    betSummaryEl.textContent = 'Current bets: none';
     betsListEl.innerHTML = '';
     return;
   }
-  betSummaryEl.textContent = `Aktuális fogadások: ${currentBets.length} tét`;
-  // render detailed list
+
+  betSummaryEl.textContent = `Current bets: ${currentBets.length} bet(s)`;
+
   betsListEl.innerHTML = currentBets.map((b,i)=> {
-    if(b.type==='number') return `<div> #${i+1}: Number ${b.value} — ${b.stake} chip</div>`;
-    return `<div> #${i+1}: ${b.type.toUpperCase()} ${b.value} — ${b.stake} chip</div>`;
+    if(b.type==='number') return `<div> #${i+1}: Number ${b.value} — ${b.stake} chips</div>`;
+    return `<div> #${i+1}: ${b.type.toUpperCase()} ${b.value} — ${b.stake} chips</div>`;
   }).join('');
-  // highlight numbered cells
+
   currentBets.forEach(b=>{
     if(b.type === 'number'){
       const el = gridEl.querySelector(`[data-num="${b.value}"]`);
@@ -97,7 +96,7 @@ function renderBetsUI(){
 }
 
 function spinWheel(){
-  if(currentBets.length===0){ resultEl.textContent = '🔔 Nincs téted! Tedd meg a fogadásokat a gridre vagy a gyorsgombokkal.'; return; }
+  if(currentBets.length===0){ resultEl.textContent = '🔔 No bets placed! Use the grid or quick bet buttons.'; return; }
 
   const idx = Math.floor(Math.random()*numbers.length);
   const chosenNumber = numbers[idx];
@@ -107,7 +106,7 @@ function spinWheel(){
   wheelEl.style.transition = 'transform 3s cubic-bezier(.2,.9,.2,1)';
   wheelEl.style.transform = `rotate(${targetAngle}deg)`;
 
-  resultEl.textContent = 'Pörgetés...';
+  resultEl.textContent = 'Spinning...';
 
   setTimeout(()=>{
     wheelEl.style.transition = 'none';
@@ -122,14 +121,14 @@ function spinWheel(){
 function evaluateBets(chosenNumber){
   const col = numberColor(chosenNumber);
   let totalWon = 0, totalLost = 0;
-  const messages = [`Nyertes szám: ${chosenNumber} (${col})`];
+  const messages = [`Winning number: ${chosenNumber} (${col})`];
 
   currentBets.forEach(b=>{
     if(b.type === 'number'){
       if(Number(b.value) === chosenNumber){
         const payout = b.stake * 35;
         totalWon += payout;
-        messages.push(`Szám ${b.value} eltalálva! +${payout} chip`);
+        messages.push(`Number ${b.value} hit! +${payout} chips`);
       } else {
         totalLost += b.stake;
       }
@@ -137,7 +136,7 @@ function evaluateBets(chosenNumber){
       if(chosenNumber !== 0 && b.value === col){
         const payout = b.stake * 2;
         totalWon += payout;
-        messages.push(`Szín ${b.value} eltalálva! +${payout} chip`);
+        messages.push(`Color ${b.value} hit! +${payout} chips`);
       } else totalLost += b.stake;
     } else if(b.type === 'parity'){
       if(chosenNumber !== 0){
@@ -145,21 +144,20 @@ function evaluateBets(chosenNumber){
         if((b.value === 'even' && isEven) || (b.value === 'odd' && !isEven)){
           const payout = b.stake * 2;
           totalWon += payout;
-          messages.push(`Párosság (${b.value}) eltalálva! +${payout} chip`);
+          messages.push(`Parity (${b.value}) hit! +${payout} chips`);
         } else totalLost += b.stake;
       } else totalLost += b.stake;
     } else if(b.type === 'range'){
       if(b.value === '1-18' && chosenNumber>=1 && chosenNumber<=18){
         const payout = b.stake * 2;
         totalWon += payout;
-        messages.push(`Range 1-18 eltalálva! +${payout} chip`);
+        messages.push(`Range 1–18 hit! +${payout} chips`);
       } else if(b.value === '19-36' && chosenNumber>=19 && chosenNumber<=36){
         const payout = b.stake * 2;
         totalWon += payout;
-        messages.push(`Range 19-36 eltalálva! +${payout} chip`);
+        messages.push(`Range 19–36 hit! +${payout} chips`);
       } else totalLost += b.stake;
     } else if(b.type === 'dozen'){
-      // 1 => 1-12, 2 => 13-24, 3 =>25-36
       const val = Number(b.value);
       let hit=false;
       if(val===1 && chosenNumber>=1 && chosenNumber<=12) hit=true;
@@ -168,22 +166,20 @@ function evaluateBets(chosenNumber){
       if(hit){
         const payout = b.stake * 3;
         totalWon += payout;
-        messages.push(`Dozen ${b.value} eltalálva! +${payout} chip`);
+        messages.push(`Dozen ${b.value} hit! +${payout} chips`);
       } else totalLost += b.stake;
     } else if(b.type === 'column'){
-      // Columns: column 1 = numbers 1,4,7,...34 ; column 2 = 2,5,8,...35 ; column 3 = 3,6,9,...36
       const colNum = Number(b.value);
       if(chosenNumber === 0){ totalLost += b.stake; return; }
       let hit = false;
       for(let i=1;i<=36;i++){
-        // compute column: (i-1) % 3 -> 0 -> col1, 1 -> col2, 2 -> col3
         const cidx = ((i-1) % 3) + 1;
         if(cidx === colNum && i === chosenNumber) hit = true;
       }
       if(hit){
         const payout = b.stake * 3;
         totalWon += payout;
-        messages.push(`Column ${b.value} eltalálva! +${payout} chip`);
+        messages.push(`Column ${b.value} hit! +${payout} chips`);
       } else totalLost += b.stake;
     } else {
       totalLost += b.stake;
@@ -192,9 +188,9 @@ function evaluateBets(chosenNumber){
 
   if(totalWon > 0){
     changeChips(totalWon);
-    messages.push(`Összes nyeremény: +${totalWon} chip`);
+    messages.push(`Total winnings: +${totalWon} chips`);
   } else {
-    messages.push('Sajnos nem nyertél.');
+    messages.push('Unfortunately, no win this time.');
   }
   resultEl.innerHTML = messages.join('<br>');
 }

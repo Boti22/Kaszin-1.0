@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 function startRound(){
   const bet = Math.max(1, Math.floor(Number(bjBetInput.value) || 0));
-  if(getChips() < bet){ bjResult.textContent='❌ Nincs elég chip a téthez!'; return; }
+  if(getChips() < bet){ bjResult.textContent='❌ Not enough chips for the bet!'; return; }
   deck = shuffle(buildDeck());
   playerHand = [deck.pop(), deck.pop()];
   dealerHand = [deck.pop(), deck.pop()];
@@ -132,7 +132,7 @@ function playerSurrender(){
   if(!inRound) return;
   const ret = Math.ceil(currentBet/2);
   changeChips(ret);
-  bjResult.textContent = `🛑 Surrender — vissza: ${ret} chip.`;
+  bjResult.textContent = `🛑 Surrender — returned: ${ret} chips.`;
   resetRoundUI();
 }
 
@@ -145,32 +145,32 @@ function endRound(code){
     case 'blackjack': {
       const payout = Math.floor(currentBet * 2.5);
       changeChips(payout);
-      bjResult.innerHTML = `🃏 Blackjack! Nyeremény: +${payout} chip.`;
+      bjResult.innerHTML = `🃏 Blackjack! Winnings: +${payout} chips.`;
       break;
     }
     case 'dealer_blackjack':
-      bjResult.textContent = '💥 Dealer Blackjack — vesztettél.';
+      bjResult.textContent = '💥 Dealer Blackjack — you lost.';
       break;
     case 'player_bust':
-      bjResult.textContent = '💥 Bust! Túllépted a 21-et — vesztettél.';
+      bjResult.textContent = '💥 Bust! You exceeded 21 — you lost.';
       break;
     case 'dealer_bust':
       changeChips(currentBet * 2);
-      bjResult.textContent = `🎉 Dealer bust — nyertél +${currentBet*2} chip.`;
+      bjResult.textContent = `🎉 Dealer bust — you win +${currentBet*2} chips.`;
       break;
     case 'player_win':
       changeChips(currentBet * 2);
-      bjResult.textContent = `🎉 Nyertél! +${currentBet*2} chip.`;
+      bjResult.textContent = `🎉 You win! +${currentBet*2} chips.`;
       break;
     case 'dealer_win':
-      bjResult.textContent = '😢 Dealer nyert.';
+      bjResult.textContent = '😢 Dealer wins.';
       break;
     case 'push':
       changeChips(currentBet);
-      bjResult.textContent = '🤝 Push — a tét visszakerül.';
+      bjResult.textContent = '🤝 Push — your bet has been returned.';
       break;
     default:
-      bjResult.textContent = 'Eredmény: ' + code;
+      bjResult.textContent = 'Result: ' + code;
   }
   currentBet = 0;
   updateChipUI();

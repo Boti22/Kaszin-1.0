@@ -1,6 +1,6 @@
 <!--
 ═══════════════════════════════════
-   K É S Z Í T E T T É K   (TEAM)
+        CREATED BY (TEAM)
 ═══════════════════════════════════
    Soltész Botond
    Marosi Balázs Szabolcs
@@ -9,7 +9,7 @@
 ═══════════════════════════════════
 -->
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -21,11 +21,11 @@
 <body>
   <header>
     <h1>🎰 Kaszi</h1>
-    <p>Chipek: <span id="chipDisplay">100</span></p>
+    <p>Chips: <span id="chipDisplay">100</span></p>
   </header>
 
   <main class="menu container">
-    <h2>Válassz játékot</h2>
+    <h2>Select a game</h2>
     <div class="menu-buttons">
       <button onclick="location.href='slot.html'">🎰 Slot Machine</button>
       <button onclick="location.href='roulette.html'">🎡 Roulette</button>
@@ -33,10 +33,12 @@
     </div>
 
     <div style="margin-top:20px;">
-      <button class="reset" onclick="resetChips()">🔄 Chipek visszaállítása (100)</button>
+      <button class="reset" onclick="resetChips()">🔄 Reset Chips (100)</button>
     </div>
 
-    <p style="margin-top:18px;color:#f3f3f3;opacity:0.9">A chipek minden oldalon megmaradnak (localStorage).</p>
+    <p style="margin-top:18px;color:#f3f3f3;opacity:0.9">
+      Your chips are saved across all pages (localStorage).
+    </p>
   </main>
 </body>
 </html>

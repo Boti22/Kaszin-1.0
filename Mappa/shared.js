@@ -1,34 +1,40 @@
 // shared.js
 const CHIP_KEY = 'funcasino_chips_v1';
 
-function initChips(){
+function initChips() {
   if (!localStorage.getItem(CHIP_KEY)) localStorage.setItem(CHIP_KEY, '100');
 }
-function getChips(){
+
+function getChips() {
   initChips();
-  return parseInt(localStorage.getItem(CHIP_KEY),10);
+  return parseInt(localStorage.getItem(CHIP_KEY), 10);
 }
-function setChips(val){
+
+function setChips(val) {
   localStorage.setItem(CHIP_KEY, String(Math.max(0, Math.floor(val))));
   updateChipUI();
   window.dispatchEvent(new Event('storage'));
 }
-function changeChips(delta){
+
+function changeChips(delta) {
   const next = getChips() + delta;
   setChips(next);
   return getChips();
 }
-function updateChipUI(){
+
+function updateChipUI() {
   const ids = ['chipDisplay','chipDisplaySlot','chipDisplayRoulette','chipDisplayBJ','chipCount'];
-  ids.forEach(id=>{
+  ids.forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.textContent = getChips();
+    if (el) el.textContent = getChips();
   });
 }
-function resetChips(){
+
+function resetChips() {
   setChips(100);
-  alert('🔄 Chipek visszaállítva 100-ra.');
+  alert('🔄 Chips reset to 100.');
 }
+
 document.addEventListener('DOMContentLoaded', updateChipUI);
 window.addEventListener('storage', updateChipUI);
 
