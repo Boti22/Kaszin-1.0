@@ -1,48 +1,65 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #1b1b1b, #2e2e2e);
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+:root{
+  --bg1: #071327;
+  --bg2: #0f1221;
+  --card: #0f1622;
+  --accent: #e6b800;
+  --muted: #9aa0b4;
 }
-
-header {
-  padding: 20px;
-  background-color: #222;
-  border-bottom: 2px solid #444;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color:#e8eef8;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  min-height:100vh;
 }
-
-.slot-machine {
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #333;
-  border-radius: 10px;
-  width: 300px;
+header{
+  text-align:center;
+  padding:22px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.03);
 }
-
-.reels {
-  display: flex;
-  justify-content: space-around;
-  font-size: 50px;
-  margin-bottom: 20px;
+h1{margin:0;font-size:28px}
+.container{max-width:980px;margin:24px auto;padding:12px}
+.menu-buttons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+button{
+  padding:12px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  color:var(--accent);
+  border:1px solid rgba(255,255,255,0.04);
 }
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  margin: 5px;
-  background-color: gold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+button.reset{background:#c0392b;color:#fff}
+.small{font-size:13px;color:var(--muted)}
+/* Game layout */
+.game-wrapper{max-width:980px;margin:18px auto;padding:12px}
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.chips{font-weight:800;color:var(--accent)}
+.home-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted)}
+.card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+/* slot */
+.reels{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+.reel{width:70px;height:70px;display:flex;align-items:center;justify-content:center;font-size:34px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+.result{margin-top:8px;font-weight:700}
+/* roulette */
+.roulette-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:12px}
+.number-cell{padding:10px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.04);font-weight:700;text-align:center}
+.number-cell.red{background:rgba(255,50,50,0.12);color:#ffdddd}
+.number-cell.black{background:rgba(0,0,0,0.15);color:#ddd}
+.number-cell.green{background:rgba(50,200,50,0.08);color:#dfffd8}
+.bet-panel{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wheel-wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.wheel{
+  width:260px;height:260px;border-radius:50%;overflow:hidden;border:6px solid rgba(255,255,255,0.03);
+  display:flex;align-items:center;justify-content:center;background:#111;transition:transform 3s cubic-bezier(.2,.9,.2,1);
 }
-
-button:hover {
-  background-color: orange;
-}
-
-footer {
-  margin-top: 50px;
-  font-size: 14px;
+.wheel img{width:100%;height:100%;object-fit:cover;display:block}
+.pointer{width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-bottom:22px solid var(--accent);margin-bottom:8px}
+.bets-list{margin-top:8px;color:var(--muted)}
+.bet-summary{margin-top:8px;font-weight:700}
+/* blackjack */
+.hand{display:flex;gap:8px;flex-wrap:wrap}
+.card{min-width:48px;padding:8px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);text-align:center;font-weight:700;font-size:18px}
+/* responsive */
+@media (max-width:700px){
+  .roulette-grid{grid-template-columns:repeat(3,1fr)}
+  .wheel{width:200px;height:200px}
 }
